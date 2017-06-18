@@ -79,43 +79,9 @@
  	<div id="loader"></div>
 
  <div style="display:none;" id="myDiv" class="animate-bottom">
-	<div class="container">
-            <nav class="navbar navbar-default navbar-static-top" role="navigation">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="">
-						<span><img src="../image/fgmlogo.png" style="width:25px; height:25px;">
-						<?php $user = $_SESSION["user"]; echo $church = strtoupper($user);?></span>
- 					 </a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="../dashboard.php">Home</a></li>
- 						<li><a href="../statistics.php">Statistics</a></li>
- 						<li><a href='../submissionprev.php'>Submission</a></li>
- 						<li class="active"><a href="../discipleship/">Discipleship</a></li>
-                    </ul>
-
-                    <ul class="nav navbar-nav navbar-right">
-                    	<li>
-			 				<form method="post" action="../dashboard.php" enctype="multipart/form-data">
- 								<input type="submit" name="logout" style="background:#FFF0F5; border-radius:10px; cursor:pointer; width:50px; height:30px; margin-top: 7px; margin-right:100px;" value="logout">
- 							</form>
- 						</li>
- 					</ul>
-                </div>
-            </nav>
-        </div>
-
-        <div class='container'>
-        	<div class='row'>
-        		<div class='col-md-9'>
-        			<h1 class='page-header text-danger' style="padding-left: 50px; font-weight: bold;">Discipleship Panel</h1>
+<?php include 'layout.php' ?>
+            	<div class='col-md-9'>
+        			<h1 class='page-header text-danger' style="padding-left: 0px; font-weight: bold;">Main Panel</h1>
         			<div class="row">
         				<div class="col-md-4">       					
     						<div class="panel panel-primary">
@@ -162,11 +128,6 @@
     						</div>
         				</div>
         			</div>
-        		</div>
-        		<div class='col-md-3'>
- 					<div class="page-header">
- 						<h3>Advance Options<span class="fi-widget"></span></h3>
- 					</div>
         		</div>
         	</div>
         </div>
