@@ -237,6 +237,7 @@ CREATE TABLE IF NOT EXISTS `memberinfo`(
 `resident` varchar(100)	NOT NULL,
 `leadership_position` varchar(100) NOT NULL,
 `gender` varchar(100) NOT NULL,
+`email` varchar(100) NOT NULL,
 `groupId` int(11) NOT NULL,
 `memberId` int(11) NOT NULL,
 primary key (`memberId`)
@@ -245,7 +246,7 @@ CREATE TABLE IF NOT EXISTS `group`(
 `groupId` int(255) AUTO_INCREMENT NOT NULL,
 `memberId` int(11) NOT NULL,
 `leadername` varchar(400) NOT NULL,
-
+UNIQUE(`memberId`),
 primary key(`groupId`)
 );
 CREATE TABLE IF NOT EXISTS `attendance`(

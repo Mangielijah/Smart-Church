@@ -6,6 +6,15 @@
 	 include "../link.php";
 	 $cname = $_SESSION['user'];
  ?>
+<?php
+  $memid = 1001;
+  $idquery = "SELECT * FROM memberinfo";
+  $result = mysqli_query($link, $idquery);
+  $num = mysqli_num_rows($result);
+  if($num > 0){
+   $memid = $memid + $num;
+  }
+?>
 <html>
 <head>
  <link rel="icon" type="image/png" href="../image/fgmlogo.png">
@@ -87,11 +96,11 @@
 
 
                 <!--new member body ---->
-                <form method="post" action='#' class='form-horizontal' role='form' enctype="multipart/form-data">
+                <form method="post" action='backbone/newmember.php?submit' class='form-horizontal' role='form' enctype="multipart/form-data">
 
-                    <div class='form-group'>
+                    <div class='form-group' style="display: none;">
                       <div class='col-md-10'>
-                        <input type='hidden' class='form-control' id='memid' name='memid' value='1012' disabled required>
+                        <input type='number' class='form-control' id='id' name="memid" value='<?= $memid ?>' required>
                       </div>
                     </div>
                     <div class='form-group'>
@@ -120,7 +129,7 @@
                     </div>
                     <div class='form-group'>
                       <div class='col-md-10'>
-                        <input type='text' class='form-control' name='position' placeholder="enter leadership position..." required>
+                        <input type='text' class='form-control' name='position' placeholder="enter leadership position...">
                       </div>
                     </div>
                     <input type='submit' class='btn btn-primary' value="Register">
@@ -138,7 +147,7 @@
 var myVar;
 
 function myFunction() {
-    myVar = setTimeout(showPage, 3000);
+    myVar = setTimeout(showPage, 1000);
 }
 function showPage() {
   document.getElementById("loader").style.display = "none";
