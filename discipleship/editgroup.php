@@ -6,6 +6,19 @@
 	 include "../link.php";
 	 $cname = $_SESSION['user'];
  ?>
+<?php
+$memid=0;
+  if(isset($_REQUEST['add'])){
+
+  $idquery = "SELECT * FROM `group`";
+  $result = mysqli_query($link, $idquery);
+  $num = mysqli_num_rows($result);
+  if($num > 0){
+   $memid = $memid + $num;
+  }
+  echo($memid);
+  }
+?>
 <html>
 <head>
  <link rel="icon" type="image/png" href="../image/fgmlogo.png">

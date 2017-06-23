@@ -25,7 +25,7 @@ if(isset($_REQUEST['create'])){
     $groupid = mysqli_insert_id($link);
     $update = "UPDATE memberinfo SET groupId='$groupid' WHERE memberId='$memid'";
     mysqli_query($link, $update);
-    header("location: editgroup.php");
+    header("location: editgroup.php?add");
   } 
   elseif(mysqli_num_rows($result) == 0) {
       $err = "Member does not exist in the systerm please add the member before creating the group ";
@@ -158,7 +158,9 @@ function showPage() {
 $(document).ready(function(){
     $("#leadername").on({
       keyup: function(){
-        $.get("backbone/check.php?name=" + $("#leadername").val(), function(data, status){
+        var x = document.getElementById("leadername").value;
+        $.get("backbone/check.php?name=" + x, function(data, status){
+          //alert(""+ data);
             $("datalist").html(""+ data);
             $(".status").text(""+ status);
             //alert("Data: " + data + "\nStatus: " + status);
