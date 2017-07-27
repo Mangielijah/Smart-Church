@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2017 at 07:52 PM
+-- Generation Time: Jul 27, 2017 at 05:33 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -53,8 +53,68 @@ CREATE TABLE `attendance` (
   `late` tinyint(1) NOT NULL,
   `others` varchar(100) NOT NULL,
   `memberId` int(11) NOT NULL,
-  `memberIdDate` varchar(50) NOT NULL
+  `memberIdDate` varchar(50) NOT NULL,
+  `day` int(6) NOT NULL,
+  `month` int(6) NOT NULL,
+  `year` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `attendance`
+--
+
+INSERT INTO `attendance` (`present`, `late`, `others`, `memberId`, `memberIdDate`, `day`, `month`, `year`) VALUES
+(0, 0, ' Went seminar At lisbon Germany', 1001, '10012372017', 23, 7, 2017),
+(1, 0, ' ', 1001, '10013072017', 30, 7, 2017),
+(1, 0, ' ', 1001, '1001682017', 6, 8, 2017),
+(0, 0, ' ', 1002, '10022372017', 23, 7, 2017),
+(1, 0, ' ', 1002, '10023072017', 30, 7, 2017),
+(1, 1, ' ', 1003, '10032372017', 23, 7, 2017),
+(1, 1, ' ', 1003, '10033072017', 30, 7, 2017),
+(1, 1, ' ', 1003, '1003682017', 6, 8, 2017),
+(1, 1, ' ', 1004, '10042372017', 23, 7, 2017),
+(1, 0, ' ', 1004, '10043072017', 30, 7, 2017),
+(1, 0, ' ', 1004, '1004682017', 6, 8, 2017),
+(1, 1, ' ', 1005, '10052372017', 23, 7, 2017),
+(0, 0, 'Went to FGBI', 1005, '10053072017', 30, 7, 2017),
+(0, 0, ' ', 1006, '10062372017', 23, 7, 2017),
+(1, 0, ' ', 1006, '10063072017', 30, 7, 2017),
+(1, 1, ' ', 1006, '1006682017', 6, 8, 2017),
+(1, 1, ' ', 1007, '10072372017', 23, 7, 2017),
+(1, 1, ' ', 1007, '10073072017', 30, 7, 2017),
+(0, 0, 'Ministered at Fgm Bomaka', 1008, '10082372017', 23, 7, 2017),
+(1, 1, ' ', 1008, '10083072017', 30, 7, 2017),
+(0, 0, '', 1008, '1008682017', 6, 8, 2017),
+(1, 0, ' ', 1009, '10092372017', 23, 7, 2017),
+(1, 0, ' ', 1009, '10093072017', 30, 7, 2017),
+(1, 1, ' ', 1010, '10102372017', 23, 7, 2017),
+(1, 0, ' ', 1010, '10103072017', 30, 7, 2017),
+(1, 1, ' ', 1011, '10112372017', 23, 7, 2017),
+(1, 1, ' ', 1011, '10113072017', 30, 7, 2017),
+(1, 0, ' ', 1012, '10122372017', 23, 7, 2017),
+(1, 0, ' ', 1012, '10123072017', 30, 7, 2017),
+(1, 0, ' ', 1013, '10132372017', 23, 7, 2017),
+(1, 0, ' ', 1013, '10133072017', 30, 7, 2017),
+(1, 0, ' ', 1014, '10142372017', 23, 7, 2017),
+(0, 0, 'sick', 1014, '1014682017', 6, 8, 2017),
+(1, 1, ' ', 1015, '10152372017', 23, 7, 2017),
+(1, 1, ' ', 1015, '10153072017', 30, 7, 2017),
+(1, 0, ' ', 1016, '10162372017', 23, 7, 2017),
+(1, 0, ' ', 1016, '10163072017', 30, 7, 2017),
+(1, 0, ' ', 1017, '10172372017', 23, 7, 2017),
+(1, 0, ' ', 1017, '10173072017', 30, 7, 2017),
+(1, 1, ' ', 1018, '10182372017', 23, 7, 2017),
+(1, 1, ' ', 1018, '10183072017', 30, 7, 2017),
+(1, 0, ' ', 1018, '1018682017', 6, 8, 2017),
+(1, 1, ' ', 1019, '10192372017', 23, 7, 2017),
+(1, 0, ' ', 1019, '10193072017', 30, 7, 2017),
+(1, 1, ' ', 1020, '10202372017', 23, 7, 2017),
+(1, 0, ' ', 1021, '10212372017', 23, 7, 2017),
+(1, 0, ' ', 1021, '10213072017', 30, 7, 2017),
+(1, 1, ' ', 1022, '10222372017', 23, 7, 2017),
+(0, 0, 'Went to a burial', 1022, '10223072017', 30, 7, 2017),
+(1, 0, ' ', 1023, '10232372017', 23, 7, 2017),
+(1, 1, ' ', 1023, '10233072017', 30, 7, 2017);
 
 -- --------------------------------------------------------
 
@@ -85,23 +145,25 @@ CREATE TABLE `aug` (
 --
 
 CREATE TABLE `churchinfo` (
-  `churchname` varchar(400) NOT NULL,
+  `churchname` varchar(50) NOT NULL,
   `password` varchar(400) NOT NULL,
+  `area` varchar(50) NOT NULL,
   `district` varchar(400) NOT NULL,
+  `dnumber` int(11) NOT NULL,
   `pastor` varchar(400) NOT NULL,
   `support` int(255) NOT NULL,
   `number` int(255) NOT NULL,
   `centralpercent` int(255) NOT NULL,
   `areapercent` int(255) NOT NULL,
   `churchpercent` int(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `churchinfo`
 --
 
-INSERT INTO `churchinfo` (`churchname`, `password`, `district`, `pastor`, `support`, `number`, `centralpercent`, `areapercent`, `churchpercent`) VALUES
-('cowfence', 'bf0047ab603bcf4c954296e4ef9b27f6c01906dd', 'LIMBE', 'Pastor Manga Simon', 66000, 699985298, 14, 45, 55);
+INSERT INTO `churchinfo` (`churchname`, `password`, `area`, `district`, `dnumber`, `pastor`, `support`, `number`, `centralpercent`, `areapercent`, `churchpercent`) VALUES
+('cowfence', 'bf0047ab603bcf4c954296e4ef9b27f6c01906dd', 'South-West Area 3', 'Limbe', 672084140, 'Manga Simon', 66000, 651274486, 14, 45, 55);
 
 -- --------------------------------------------------------
 
@@ -188,11 +250,13 @@ CREATE TABLE `group` (
 
 INSERT INTO `group` (`groupId`, `memberId`, `leadername`) VALUES
 (1, 1003, 'Bokossah Lewis'),
-(2, 1001, 'Mangi Elijah '),
+(2, 1014, 'Georges Laslie'),
 (3, 1009, 'Negesa Bright'),
 (4, 1005, 'Ako-Egbe Carlet'),
-(5, 1010, 'Aka Smith'),
-(6, 1011, 'Bertilla Kisevi');
+(5, 1002, 'Mangi Elisha'),
+(6, 1017, 'Che George'),
+(7, 1019, 'Fouweh Maverlous'),
+(8, 1023, 'Gilberto 4 Jesus');
 
 -- --------------------------------------------------------
 
@@ -267,7 +331,8 @@ CREATE TABLE `jun` (
 INSERT INTO `jun` (`ID`, `offering`, `tithes`, `missions`, `totalinc`, `male`, `female`, `messagetopic`, `visit`, `children`, `totalmembers`, `spastor`, `year`) VALUES
 (1, 6000, 500000, 0, 506000, 50, 50, 'anointig', 2, 100, 202, 'ps manga', 17),
 (2, 652500, 450600, 0, 1103100, 180, 152, 'Love of God', 2, 350, 684, 'Ps Manga Simon', 17),
-(3, 650, 450, 0, 1100, 3, 5, 'love of God', 0, 1, 9, 'Sis Glory', 17);
+(3, 650, 450, 0, 1100, 3, 5, 'love of God', 0, 1, 9, 'Sis Glory', 17),
+(4, 650000, 450090, 0, 1100090, 400, 460, 'The anointing of the lord', 13, 400, 1273, 'Ako-egbe Carlet', 17);
 
 -- --------------------------------------------------------
 
@@ -346,17 +411,28 @@ CREATE TABLE `memberinfo` (
 
 INSERT INTO `memberinfo` (`name`, `phonenumber`, `resident`, `leadership_position`, `gender`, `email`, `groupId`, `memberId`) VALUES
 ('Mangi Elijah ', '672084140', 'Mallingo', 'Deacon', 'male', 'nmc@yahoo.com', 2, 1001),
-('Mangi Elisha', '672307598', 'Molyko Back Nextel', '', 'male', 'mangielisha6@gmail.com', 0, 1002),
+('Mangi Elisha', '672307598', 'Molyko Back Nextel', '', 'male', 'mangielisha6@gmail.com', 5, 1002),
 ('Bokossah Lewis', '69853254', 'Malingo', 'Choir Leader', 'male', 'itorlewis@gmail.com', 1, 1003),
-('Ako-Egbe Kelly', '681394290', 'Church-street Limbe', '', 'female', 'kelly96@gmail.com', 0, 1004),
+('Ako-Egbe Kelly', '681394290', 'Church-street Limbe', '', 'female', 'kelly96@gmail.com', 1, 1004),
 ('Ako-Egbe Carlet', '651269979', 'Buea Molyko', 'Elder', 'male', 'akoegbecarlet@gmail.com', 4, 1005),
-('Tachyon Alvine', '698523299', 'Great Soppo Buea', '', 'female', '', 0, 1006),
-('Fonepie Leslie', '678563241', 'Bakweri town buea', '', 'male', 'fpyleslie23@yahoo.com', 0, 1007),
-('Imbi laura', '651086871', 'Malingo', 'Youth Leader', 'female', 'imbilaura@gmail.com', 0, 1008),
+('Tachyon Alvine', '698523299', 'Great Soppo Buea', '', 'female', '', 2, 1006),
+('Fonepie Leslie', '678563241', 'Bakweri town buea', '', 'male', 'fpyleslie23@yahoo.com', 3, 1007),
+('Imbi laura', '651086871', 'Malingo', 'Youth Leader', 'female', 'imbilaura@gmail.com', 1, 1008),
 ('Negesa Bright', '670338892', 'Bongo Square buea', 'Deaconness', 'female', 'negesabright@gmail.com', 3, 1009),
 ('Aka Smith', '651028467', 'Bomaka Buea', '', 'male', 'akoshimith@gmail.com', 5, 1010),
 ('Bertilla Kisevi', '656897458', 'Bambili Bamenda', '', 'female', 'kiseviberty35@hotmail.com', 6, 1011),
-('Takor Bryan', '699985298', 'Sosoliso Malingo Buea', 'Pastor', 'male', 'takonabi45@yahoo.com', 0, 1012);
+('Takor Bryan', '699985298', 'Sosoliso Malingo Buea', 'Pastor', 'male', 'takonabi45@yahoo.com', 3, 1012),
+('Sama Faith', '654105539', 'Buea Ndongo', 'Elder', 'male', 'faith34@gmail.com', 5, 1013),
+('Georges Laslie', '674192301', 'Dirthy South', '', 'male', 'lasliejr@gmail.com', 2, 1014),
+('Mangi Cedric', '', 'Mutengene', '', 'male', 'cedrico45@gmail.com', 4, 1015),
+('Sama Beatrice', '51401722', 'Limbe Slaughter house', 'Women Leader', 'female', 'beasama47@gmail.com', 6, 1016),
+('Che George', '699985298', 'Mile 17 buea', 'Elder', 'male', 'fgmlael@yahoo.com', 6, 1017),
+('Limunga Justine', '651066332', 'Muea Buea', '', 'female', 'ljmylove@gmail.com', 2, 1018),
+('Fouweh Maverlous', '662389123', 'Churchstreet LImbe', '', 'female', '', 7, 1019),
+('Lerine', '54555655', 'cleckquarter', '', 'female', 'lerine@gmail.com', 1, 1020),
+('Ebai Calton', '645476234', 'Idenua', '', 'male', 'caltonjones@gmail.com', 7, 1021),
+('Wisdom Boris', '654390232', 'Mutengene', '', 'male', 'Boriswis@gmail.com', 3, 1022),
+('Gilberto 4 Jesus', '698726122', 'Limbe ', 'Music Administrator', 'male', 'G4j@gmail.com', 8, 1023);
 
 -- --------------------------------------------------------
 
@@ -1266,7 +1342,7 @@ ALTER TABLE `feb`
 -- AUTO_INCREMENT for table `group`
 --
 ALTER TABLE `group`
-  MODIFY `groupId` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `groupId` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `jan`
 --
@@ -1281,7 +1357,7 @@ ALTER TABLE `jul`
 -- AUTO_INCREMENT for table `jun`
 --
 ALTER TABLE `jun`
-  MODIFY `ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `mar`
 --
