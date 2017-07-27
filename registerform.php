@@ -2,10 +2,12 @@
  include "link.php";
  
  if(isset($_REQUEST["submit"])){
-      $churchname =mysqli_real_escape_string($link, $_POST["cname"]);
+      $churchname =strtolower(mysqli_real_escape_string($link, $_POST["cname"]));
 	  $pasname =$_POST["Pname"];
 	  $psd =sha1(mysqli_real_escape_string($link, $_POST["pwd"]));
 	  $district =$_POST["district"];
+	  $area =$_POST['area'];
+	  $dnumber = $_POST['dnumber'];
 	  $support =$_POST["Psup"];
 	  $cfpercent =$_POST["cfpercent"];
 	  $apercent =$_POST["Apercent"];
@@ -13,18 +15,18 @@
 	  $pnum =$_POST["Pnum"];
 	  
 	  $qry = "insert into churchinfo set churchname='$churchname', support='$support', password='$psd', pastor='$pasname',
-	  district='$district', number ='$pnum', centralpercent='$cfpercent', areapercent='$apercent', churchpercent='$cpercent'";
+	  district='$district', number ='$pnum', area='$area', dnumber='$dnumber', centralpercent='$cfpercent', areapercent='$apercent', churchpercent='$cpercent'";
 	  mysqli_Query($link, $qry);
 	  
 	  header("location: index.php");
  }
  ?>
  <?php
- 	$testquery = "select * from churchinfo";
- 	$queryresult = mysqli_Query($link, $testquery);
- 	if(mysqli_num_rows($queryresult) > 0){
- 		header("location:	index.php?err");
- 	}
+ //	$testquery = "select * from churchinfo";
+ 	//$queryresult = mysqli_Query($link, $testquery);
+ 	//if(mysqli_num_rows($queryresult) > 0){
+ 	//	header("location:	index.php?err");
+ 	//}
  ?>
  <html>
  <head>
@@ -88,15 +90,6 @@
  <td>CHURCH NAME:</td></tr><tr><td><input type="text" name="cname" value="" placeholder="enter church name..." required></td>
  </tr>
  <tr>
-  <tr>
- <td>Pastor's Name:</td></tr><tr><td><input type="text" name="Pname" value="" placeholder="enter pastor's name..." required></td>
- </tr>
- <td>Pastor's Support:</td></tr><tr><td><input type="number" name="Psup" value="" placeholder="enter pastor's Support..." required></td>
- </tr>
-  <tr>
- <td>Pastor's N&#730;:</td></tr><tr><td><input type="number" name="Pnum" value="" placeholder="enter pastor's number..." required></td>
- </tr>
- <tr>
  <td>Password:<td>
  </tr>
  <tr>
@@ -113,12 +106,37 @@
  </td>
  </tr>
   <tr>
- <td>DISTRICT<td>
+ <td>Name of Area<td>
  </tr>
  <tr>
  <td>
- <input type="text" name="district" value="" placeholder="enter district..." required>
+ <input type="text" name="area" value="" placeholder="enter name of area..." required>
  </td>
+ </tr>
+  <tr>
+ <td>Name of District<td>
+ </tr>
+ <tr>
+ <td>
+ <input type="text" name="district" value="" placeholder="enter name of district..." required>
+ </td>
+ </tr>
+  <tr>
+ <td>District pastor's number<td>
+ </tr>
+ <tr>
+ <td>
+ <input type="number" name="dnumber" value="" placeholder="enter district pastor number..." required>
+ </td>
+ </tr>
+ <tr>
+  <tr>
+ <td>Pastor's Name:</td></tr><tr><td><input type="text" name="Pname" value="" placeholder="enter pastor's name..." required></td>
+ </tr>
+ <td>Pastor's Support:</td></tr><tr><td><input type="number" name="Psup" value="" placeholder="enter pastor's Support..." required></td>
+ </tr>
+  <tr>
+ <td>Pastor's N&#730;:</td></tr><tr><td><input type="number" name="Pnum" value="" placeholder="enter pastor's number..." required></td>
  </tr>
  <tr>
  <td>Central Fund Percentage</td>

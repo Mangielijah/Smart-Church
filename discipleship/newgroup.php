@@ -25,6 +25,7 @@ if(isset($_REQUEST['create'])){
     $groupid = mysqli_insert_id($link);
     $update = "UPDATE memberinfo SET groupId='$groupid' WHERE memberId='$memid'";
     mysqli_query($link, $update);
+    $_SESSION["groupId"] = $groupid;
     header("location: editgroup.php?add");
   } 
   elseif(mysqli_num_rows($result) == 0) {

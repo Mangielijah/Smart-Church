@@ -134,6 +134,9 @@ $qury = mysqli_query($link, "select * from churchinfo");
 $row = mysqli_fetch_assoc($qury);
 $church = $row['churchname'];
 $pastor = $row['pastor'];
+		$areap = $row['area'];
+		$district = $row['district'];
+		$dnumber = $row['dnumber'];
 $pnumber = $row['number'];
 $support = $row['support'];
 $centralpercent = $row['centralpercent'];
@@ -194,9 +197,9 @@ $churchpercent = $row['churchpercent'];
 		<div id="box2">
            <span id="sp1">FULL GOSPEL MISSION CAMEROON</span><br>
 		   <span>MISSION DU PLIEN EVANGILE DU CAMEROUN</span><br>
-		   <span id="sp2">SOUTH WEST AREA III</span><br>
-		   <span id="sp3">LIMBE DISTRICT / DISTRICT DE LIMBE </span><br>
-		   <span>TEL: (+237)651757952;</span>&nbsp;&nbsp;<span><?php
+		   <span id="sp2"><?= strtoupper($areap) ?></span><br>
+		   <span id="sp3"><?= strtoupper($district) ?> DISTRICT / DISTRICT DE <?= strtoupper($district) ?> </span><br>
+		   <span>TEL: (+237)<?= $dnumber ?>;</span>&nbsp;&nbsp;<span><?php
 			//number for church info
 		   		if($pnumber == ""){
 		   			echo "";

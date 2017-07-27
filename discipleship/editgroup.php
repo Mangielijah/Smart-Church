@@ -7,16 +7,21 @@
 	 $cname = $_SESSION['user'];
  ?>
 <?php
-$memid=0;
-  if(isset($_REQUEST['add'])){
-
-  $idquery = "SELECT * FROM `group`";
-  $result = mysqli_query($link, $idquery);
-  $num = mysqli_num_rows($result);
-  if($num > 0){
-   $memid = $memid + $num;
+$memid=1;
+  if(isset($_REQUEST['add']) && $_REQUEST['add'] == ""){
+    $memid = $_SESSION['groupId'];
+    unset($_SESSION['groupId']);
+    echo "<script>
+    document.getElementById('groupId').val = $memid;
+    </script>
+    ";
   }
-  echo($memid);
+  else if(isset($_REQUEST['add']) && $_REQUEST['add'] != ""){
+    $memid = $_REQUEST['add'];
+    echo "<script>
+    document.getElementById('groupId').val = $memid;
+    </script>
+    ";
   }
 ?>
 <html>
@@ -98,16 +103,117 @@ $memid=0;
         			<div class="row">
 
 
-                <!--new edit body ---->
-
-
+                <!--new edit body ---->                    
+                    <div class='form-group' style="display: block;">
+                      <div class='col-md-10'>
+                        <input type='number' class='form-control' value='<?= $memid ?>' id='groupId' placeholder='enter group number....' name='memid' required>
+                      </div>
+                    </div>
+                    <div class='table-responsive col-md-9 collapse' id='body'>
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th></th>
+                              <th></th>
+                            </tr>
+                          </thead>
+                          <tbody id='dataarea'>
+                          </tbody>
+                        </table>
+                        <span class='text-primary'>Click here to add member to this group <button class='btn btn-success' id='btnadd'>ADD MEMBER</button></span>
+                        <div class="form-inline collapse" id='addmem' style='margin-top: 10px;' role="form">
+                          <div class='form-group'>
+                            <label for="name">Name:</label>
+                            <input list="name" class='form-control' id='membername' style="width: 500px; " name='membername' placeholder="enter name..." required>
+                            <datalist id='name'>
+                            </datalist>
+                            <input type='text' class='form-control' style="display:none;" id='id' name='memid' required>
+                          </div>
+                          <div class='form-group'>
+                            <label for="error" style='padding:7px; margin-top: 20px; display:none; position: relative;' class="alert-danger alert">ss</label>
+                          </div>
+                          <button type="button" class="btn btn-success" id='btnaddsub'>Add</button>
+                        </div>
+                    </div>
         			</div>
         		</div>
         	</div>
         </div>
         
  </div>
-  <script type="text/javascript">
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#btnadd").click(function(){
+        $("#addmem").toggle("slow");
+    });
+
+    if($("#groupId").val() != ""){
+        $("#body").show("slow");
+        $.get("backbone/getdata.php?id=" + $("#groupId").val(), function(datas, statu){
+            $("#dataarea").html(""+ datas);
+        //alert("Data: " + datas + "\nStatus: " + statu);
+      });
+    }
+    $("#groupId").keyup(function(){
+      if($("#groupId").val() != ""){
+        $("#body").show("slow");
+        $.get("backbone/getdata.php?id=" + $("#groupId").val(), function(datas, statu){
+            $("#dataarea").html(""+ datas);
+        //alert("Data: " + datas + "\nStatus: " + statu);
+        });
+      }
+      else if($("#groupId").val() == ""){
+        $("#body").hide("slow");
+      }
+    });
+    $("#membername").on({
+      keyup: function(){
+        $.get("backbone/getdata.php?name=" + $("#membername").val(), function(data, status){
+          //alert(""+ data);
+            $("datalist").html(""+ data);
+            //alert("Data: " + data + "\nStatus: " + status);
+        });
+      },
+      keydown: function(){
+        $.get("backbone/getdata.php?names=" + $("#membername").val(), function(datass, statu){
+            $("#id").attr(
+              "value", ""+ datass 
+              );
+            //alert("Data: " + data + "\nStatus: " + status);
+        });
+      }
+    });
+});
+ $("#btnaddsub").on({
+      focus: function(){
+        $.get("backbone/getdata.php?names=" + $("#membername").val(), function(datass, statu){
+            $("#id").attr(
+              "value", ""+ datass 
+              );
+            //alert("Data: " + data + "\nStatus: " + status);
+        });
+      },
+      mouseenter: function(){
+        $.get("backbone/getdata.php?names=" + $("#membername").val(), function(datass, statu){
+            $("#id").attr(
+              "value", ""+ datass 
+              );
+            //alert("Data: " + data + "\nStatus: " + status);
+        });
+      },
+      mouseup: function(){
+        $.get("backbone/getdata.php?id=" + $("#groupId").val(), function(datas, statu){
+            $("#dataarea").html(""+ datas);
+        //alert("Data: " + datas + "\nStatus: " + statu);
+        });
+      },
+      keypress: function(){
+        $.get("backbone/getdata.php?id=" + $("#groupId").val(), function(datas, statu){
+            $("#dataarea").html(""+ datas);
+        //alert("Data: " + datas + "\nStatus: " + statu);
+        });
+      }
+    });
 var myVar;
 
 function myFunction() {
@@ -116,6 +222,26 @@ function myFunction() {
 function showPage() {
   document.getElementById("loader").style.display = "none";
   document.getElementById("myDiv").style.display = "block";
+}
+var button = document.getElementById('btnaddsub');
+button.addEventListener("click", send);
+button.addEventListener("click", final);
+function send(){
+    $.post("backbone/getdata.php?addmem",
+    {
+        memberid: $("#id").val(),
+        group: $("#groupId").val(),
+        name: $("#membername").val()
+    });
+}
+function remove(x){  
+  var memid = x;
+  $.get("backbone/getdata.php?remove="+ memid, function(){
+    final();
+  })
+}
+function final(){
+  window.location = "editgroup.php?add="+ $("#groupId").val();    
 }
 </script>
 </html>

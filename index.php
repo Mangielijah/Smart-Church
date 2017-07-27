@@ -3,7 +3,7 @@
  if(isset($_REQUEST["attempt"])){
      //including the church database	 
     include "link.php";
-	 $cname = mysqli_real_escape_string($link, $_POST["churchname"]);
+	 $cname = strtolower(mysqli_real_escape_string($link, $_POST["churchname"]));
 	 $pass = sha1(mysqli_real_escape_string($link, $_POST["pwd"]));
 	 
 	 $query = mysqli_Query($link, "SELECT churchname FROM churchinfo WHERE churchname='$cname' AND  password='$pass'") or die(mysqli_error());

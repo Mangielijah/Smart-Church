@@ -6,6 +6,52 @@
 	 include "../link.php";
 	 $cname = $_SESSION['user'];
  ?>
+ <?php
+  $dynamicgroup = "";
+  $data = "";
+  $totalgroupquery ="SELECT * FROM `group`";
+  $totalgroupresult = mysqli_query($link, $totalgroupquery);
+  $totalgroup = mysqli_num_rows($totalgroupresult);
+  $i = 1;
+  while($i <= $totalgroup){
+    $groupdataquery = "SELECT * FROM memberinfo WHERE groupId='$i'";
+    $groupdataresult = mysqli_query($link, $groupdataquery);
+    $leaderquery = "SELECT * FROM `group` WHERE groupId='$i'";
+    $leaderresult = mysqli_query($link, $leaderquery);
+    if($leaderresult){
+      $rowname = mysqli_fetch_assoc($leaderresult);
+      $leader = $rowname['leadername'];
+        while($row = mysqli_fetch_array($groupdataresult)){
+          $name = $row['name'];
+          if($name == $leader){
+            $data .="<a href='#' class='list-group-item'><span class='label label-info pull-right' style='font-size: 15px;''>L</span>$name</a>";
+          }
+          else{
+            $data .="<a href='#' class='list-group-item'>$name</a>";
+          }
+        }
+      // $phone = $row['phonenumber'];
+      // $resident = $row['resident'];
+      // $lposition = $row['leadership_position'];
+      // $gender = $row['gender'];
+      // $email = $row['email'];
+        $dynamicgroup .= "
+                <div class='col-md-4'>                
+                  <div class='panel panel-primary'>
+                    <div class='panel-heading'><a href='#' style='font-size:30px; color: #ffffff; text-decoration: none;''>Group ".$i."</a></div>
+                    <div class='panel-body' style='padding: 5px;''>
+                      <div class='list-group'> 
+                        $data 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                ";
+      $i++;
+      $data = "";
+    }
+  }
+ ?>
 <html>
 <head>
  <link rel="icon" type="image/png" href="../image/fgmlogo.png">
@@ -81,52 +127,9 @@
  <div style="display:none;" id="myDiv" class="animate-bottom">
 <?php include 'layout.php' ?>
             	<div class='col-md-9'>
-        			<h1 class='page-header text-danger' style="padding-left: 0px; font-weight: bold;">Main Panel</h1>
+        			 <h1 class='page-header text-danger' style="padding-left: 0px; font-weight: bold;">Main Panel</h1>
         			<div class="row">
-        				<div class="col-md-4">       					
-    						<div class="panel panel-primary">
-      							<div class="panel-heading"><a href='#' style="font-size:30px; color: #ffffff; text-decoration: none;">Group 1</a></div>
-      							<div class="panel-body" style="padding: 5px;">
-      								<div class="list-group">
-  										<a href="#" class="list-group-item active"><span class="label label-info pull-right" style="font-size: 15px;">L</span> Mangi Elijah</a>
-  										<a href="#" class="list-group-item"> Itor Lewis</a> 
-  										<a href="#" class="list-group-item"> Negesa Bright</a>
-  										<a href="#" class="list-group-item"> Aka Smith</a> 
-  										<a href="#" class="list-group-item"> Bertila Kisevi</a>
-  										<a href="#" class="list-group-item"> Liyeuk Reynald</a> 
-									</div>
-      							</div>
-    						</div>
-        				</div>
-        				<div class="col-md-4">       					
-    						<div class="panel panel-primary">
-      							<div class="panel-heading"><a href='#' style="font-size:30px; color: #ffffff; text-decoration: none;">Group 2</a></div>
-      							<div class="panel-body" style="padding: 5px;">
-      								<div class="list-group">
-  										<a href="#" class="list-group-item"> Mangi Elijah</a>
-  										<a href="#" class="list-group-item"> Itor Lewis</a> 
-  										<a href="#" class="list-group-item active"><span class="label label-info pull-right" style="font-size: 15px;">L</span> Negesa Bright</a>
-  										<a href="#" class="list-group-item"> Aka Smith</a> 
-  										<a href="#" class="list-group-item"> Bertila Kisevi</a>
-  										<a href="#" class="list-group-item"> Liyeuk Reynald</a> 
-									</div>
-      							</div>
-    						</div>
-        				</div>
-        				<div class="col-md-4">       					
-    						<div class="panel panel-primary">
-      							<div class="panel-heading"><a href='#' style="font-size:30px; color: #ffffff; text-decoration: none;">Group 3</a></div>
-      							<div class="panel-body" style="padding: 5px;">
-      								<div class="list-group">
-  										<a href="#" class="list-group-item"> Mangi Elijah</a>
-  										<a href="#" class="list-group-item"> Itor Lewis</a> 
-  										<a href="#" class="list-group-item"> Aka Smith</a> 
-  										<a href="#" class="list-group-item active"><span class="label label-info pull-right" style="font-size: 15px;">L</span> Bertila Kisevi</a>
-  										<a href="#" class="list-group-item"> Liyeuk Reynald</a> 
-									</div>
-      							</div>
-    						</div>
-        				</div>
+        				<?= $dynamicgroup ?>
         			</div>
         		</div>
         	</div>

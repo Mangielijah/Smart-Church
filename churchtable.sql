@@ -1,7 +1,9 @@
 CREATE TABLE IF NOT EXISTS `churchinfo`(
-`churchname` varchar(400) NOT NULL,
+`churchname` varchar(50) NOT NULL,
 `password` varchar(400) NOT NULL,
+`area` varchar(50) NOT NULL,
 `district` varchar(400) NOT NULL,
+`dnumber` int(11) NOT NULL,
 `pastor` varchar(400) NOT NULL,
 `support` int(255) NOT NULL,
 `number` int(255) NOT NULL,
@@ -255,6 +257,8 @@ CREATE TABLE IF NOT EXISTS `attendance`(
 `others` varchar(100) NOT NULL,
 `memberId` int(11) NOT NULL,
 `memberIdDate` varchar(50) NOT NULL,
-
+`day` int(6) NOT NULL,
+`month` int(6) NOT NULL,
+`year` int(6) NOT NULL,
 primary key (`memberIdDate`)
 );
