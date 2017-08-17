@@ -22,11 +22,11 @@
  }
  ?>
  <?php
- //	$testquery = "select * from churchinfo";
- 	//$queryresult = mysqli_Query($link, $testquery);
- 	//if(mysqli_num_rows($queryresult) > 0){
- 	//	header("location:	index.php?err");
- 	//}
+ $testquery = "select * from churchinfo";
+ 	$queryresult = mysqli_Query($link, $testquery);
+ 	if(mysqli_num_rows($queryresult) > 0){
+ 	header("location:	index.php?err");
+ 	}
  ?>
  <html>
  <head>

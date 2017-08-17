@@ -3,7 +3,19 @@
    if(!isset($_SESSION["user"])){
 	 header("location: index.php");
    }
+
+   if(isset($_REQUEST['submits'])){
+        $mon = $_POST['month'];
+        $year = $_POST['year'];
+
+        $_SESSION['month'] = $mon;
+        $_SESSION['year'] = $year;
+
+        //redirect
+        header('location:submissionprev.php');
+   }
 	 include "link.php";
+   
  ?>
  <?php
  if(isset($_POST["logout"])){
@@ -38,8 +50,8 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="dashboard.php">Home</a></li>
- 						<li class="active"><a href="statistics.php">Statistics</a></li>
+                        <li class="active"><a href="dashboard.php">Home</a></li>
+ 						<li><a href="statistics.php">Statistics</a></li>
  						<li><a href='submissionprev.php'>Submission</a></li>
                         <li><a href="discipleship/">Discipleship</a></li>
                     </ul>
@@ -58,10 +70,10 @@
   <h3 class="text-center text-info">Please enter the month and the year</h3>
   <div style='margin-left:400px; margin-right:400px;' class="panel panel-default">
     <div class="panel-body" style="padding-left:40px; padding-right:40px;">
-    	<form method='post' action='statistics.php' role='form' class="form-horizontal">
+    	<form method='post' action='show.php' role='form' class="form-horizontal">
     		<div class='form-group'>
     			<label class='control-label' for='month'>Month</label>
-  				<select class="form-control primary" id="month" name='month'>
+  				<select class="form-control primary" id="month" name='month' required>
     				<option value='jan'>January</option>
     				<option value='feb'>February</option>
     				<option value="mar">March</option>
@@ -78,9 +90,9 @@
     		</div>
     		<div class="form-group">
     			<label class='control-label' for='year'>Year</label>
-    			<input type='number' class='primary form-control' id='year' name='year'>
+    			<input type='number' class='primary form-control' id='year' name='year' required>
     		</div>
-    		<input type='submit' name='submit' class="form-control btn btn-success">
+    		<input type='submit' name='submits' class="form-control btn btn-success">
     	</form>
     </div>
   </div>

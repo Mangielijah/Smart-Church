@@ -159,8 +159,8 @@ if(isset($_REQUEST['update1'])){
  					<th> </th>
  				</tr>
  				<?php
-  					$mon = strtolower(date("M"));
-  					$yea = date("Y");
+  					$mon = $_POST['month'];
+  					$yea = $_POST['year'];
             $year = $yea % 100;
    					$listquery = "SELECT * FROM `$mon` WHERE year=$year";
    					$queryres = mysqli_Query($link, $listquery);

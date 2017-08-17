@@ -11,7 +11,7 @@
       if($total > 0){
 		 //start user's session 
 		 
-		 session_start();
+		  session_start();
 		 $_SESSION["user"] = $cname;
 		 header("location: dashboard.php");
 	  } 

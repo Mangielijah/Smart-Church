@@ -39,8 +39,9 @@
  	$pname = $_POST['pname'];
  	$pnumber = $_POST['pnum'];
  	$psupport = $_POST['psup'];
+  $dnumber = $_POST['dnum'];
 
- 	$updquery = "UPDATE churchinfo SET pastor='$pname', `number`='$pnumber', support='$psupport' WHERE churchname='$cname'";
+ 	$updquery = "UPDATE churchinfo SET pastor='$pname', `number`='$pnumber', `dnumber`='$dnumber', support='$psupport' WHERE churchname='$cname'";
  	mysqli_query($link, $updquery);
  	header('location: dashboard.php');
  }
@@ -304,7 +305,7 @@ function calc1(){
  			<div class="page-header">
  				<h2>Advance Options<span class="fi-widget"></span></h2>
  			</div>
-  			<a href="show.php" class="btn btn-default form-control">
+  			<a href="showindex.php" class="btn btn-default form-control">
   				<b>View sunday statistics<span style="font-size:25px;" class="pull-right fi-plus"></span></b>
   			</a>
   			<button type="submit" id="editperc" class="btn btn-default form-control">
@@ -333,8 +334,10 @@ function calc1(){
   						<input type="text" id='pname' name="pname" value="<?= $row['pastor'] ?>" class="form-control">
   						<label class="control-label" for="pnum">Pastor number</label>
   						<input type="number" id='pnum' name="pnum" value="<?= $row['number'] ?>" class="form-control">
-  						<label class="control-label" for="support">Pastor Support</label>
-  						<input type="number" id="support" name="psup" value="<?= $row['support'] ?>" class="form-control">
+  						<label class="control-label" for="support">District pastor number</label>
+  						<input type="number" id="support" name="dnum" value="<?= $row['dnumber'] ?>" class="form-control">
+              <label class="control-label" for="support">Pastor Support</label>
+              <input type="number" id="support" name="psup" value="<?= $row['support'] ?>" class="form-control">
   					</div>
   					<input type="submit" value="Update" class="btn btn-primary form-control">
   				</form>
@@ -356,7 +359,7 @@ $(document).ready(function(){
 var myVar;
 
 function myFunction() {
-    myVar = setTimeout(showPage, 5000);
+    myVar = setTimeout(showPage, 3000);
 }
 
 function showPage() {

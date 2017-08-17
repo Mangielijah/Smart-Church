@@ -6,6 +6,20 @@
 	 include "../link.php";
 	 $cname = $_SESSION['user'];
  ?>
+ <?php
+$name = "";
+if(isset($_REQUEST['id']) && $_REQUEST['id'] != ""){
+  $id = $_REQUEST['id'];
+
+  $searchquery = "SELECT * FROM `memberinfo` WHERE `memberId`='$id'";
+  $searchres = mysqli_query($link, $searchquery);
+  if (mysqli_num_rows($searchres) == 1){
+    while($row = mysqli_fetch_assoc($searchres)) {
+      $name = $row['name'];
+    }
+  }
+}
+?>
 <html>
 <head>
  <link rel="icon" type="image/png" href="../image/fgmlogo.png">
@@ -85,10 +99,18 @@
         			<div class="row">
 
 
-                <!--search body ---->
-
-
+                <!---search body -->
+                <div class='col-md-12'>
+                  <div class='form-group form-inline'>
+                    <input list="name" name='name' value='<?=$name?>' class='form-control' style='width:700px;' id='membername' placeholder="enter name to view info...">
+                        <datalist id="name">
+                        </datalist>
+                    <button type='button' id='buttonsearch' class="form-control btn btn-info">Search</button>
+                  </div>
+                </div>
         			</div>
+              <div class="row collapse list-group" id='body'>
+              </div>
         		</div>
         	</div>
         </div>
@@ -104,5 +126,31 @@ function showPage() {
   document.getElementById("loader").style.display = "none";
   document.getElementById("myDiv").style.display = "block";
 }
+$("#buttonsearch").click(function(){
+  if($("#membername").val() != ""){
+    $("#body").show("slow");
+      $.get("backbone/search.php?name="+ $("#membername").val(), function(data, status){
+        $("#body").html(""+ data);
+     });
+  }
+});
+
+$("#membername").keyup(function(){
+  var x = document.getElementById("membername").value;
+  $.get("backbone/check.php?name=" + x, function(datas, statu){
+     //alert(""+ data);
+      $("datalist").html(""+ datas);
+      $(".status").text(""+ statu);
+      //alert("Data: " + data + "\nStatus: " + status);
+    });
+  });
+$(document).ready(function(){
+ if($("#membername").val() != ""){
+        $("#body").show("slow");
+        $.get("backbone/search.php?name="+ $("#membername").val(), function(data, status){
+          $("#body").html(""+ data);
+      });
+    }
+});
 </script>
 </html>

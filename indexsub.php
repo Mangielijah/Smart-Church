@@ -50,10 +50,10 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="dashboard.php">Home</a></li>
+                        <li><a href="dashboard.php">Home</a></li>
  						<li><a href="statistics.php">Statistics</a></li>
- 						<li><a href='submissionprev.php'>Submission</a></li>
- 						<li><a href="#">Search</a></li>
+ 						<li class="active"><a href='submissionprev.php'>Submission</a></li>
+                        <li><a href="discipleship/">Discipleship</a></li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
